@@ -24,5 +24,5 @@ pub async fn create_customer(new_customer: Customer, db: Db) -> Result<impl warp
 }
 
 pub async fn get_customer(guid: String, db: Db) -> Result<dyn warp::Reply, Infallible> {
-
+    todo!()
 }

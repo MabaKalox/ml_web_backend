@@ -1,0 +1,15 @@
+[package]
+name = "ml_web_backend"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rust-bert = "0.17.0"
+anyhow = "1.0.52"
+tch = "0.6.1"
+warp = "0.3.2"
+serde = "1.0.133"
+serde_json = "1.0.74"
+tokio = "1.15.0"

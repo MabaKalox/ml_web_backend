@@ -1,12 +1,26 @@
-mod db;
 mod text_manipulations;
-mod customers;
 
-use warp;
+use actix_cors::Cors;
+use actix_web::{middleware, App, HttpServer};
+use env_logger;
+use std::env;
 
-#[tokio::main]
-async fn main() {
-    warp::serve(text_manipulations::routes::text_manipulations_route())
-        .run(([127, 0, 0, 1], 3000))
-        .await;
+#[actix_web::main]
+async fn main() -> std::io::Result<()> {
+    env::set_var("RUST_LOG", "actix_web=debug,actix_server=info");
+    env_logger::init();
+
+    HttpServer::new(|| {
+        let cors = Cors::default()
+            .allow_any_origin()
+            .allow_any_method()
+            .allow_any_header();
+        App::new()
+            .wrap(middleware::Logger::default())
+            .wrap(cors)
+            .service(text_manipulations::text_manipulation)
+    })
+    .bind(("127.0.0.1", 3000))?
+    .run()
+    .await
 }
